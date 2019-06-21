@@ -22,7 +22,7 @@ Todo o processo deve ser versionado através do GIT. Escolha entre GitHub, Gitla
                 $conn;
                 $host = 'mysql.lucianofagundes.kinghost.net';         
                 $user= 'lucianofagunde02';
-                $pass = 'King231212';
+                $pass = 'devlabs231212';
                 $db = 'lucianofagunde02';
                 $message_error = 'Erro na conexão';  
                
