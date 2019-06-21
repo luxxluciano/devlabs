@@ -13,7 +13,8 @@ Antes de iniciar:
 - O log de erros do PHP deve estar ativo via painel
 - Indentação
 
-Todo o processo deve ser versionado através do GIT. Escolha entre GitHub, Gitlab e Bitbucket para criar seu repositório antes de iniciar as tarefas.
+Todo o processo deve ser versionado através do GIT. 
+Escolha entre GitHub, Gitlab e Bitbucket para criar seu repositório antes de iniciar as tarefas.
 
 
 1- Faça o arquivo select.php funcionar com PDO.
@@ -45,7 +46,8 @@ Todo o processo deve ser versionado através do GIT. Escolha entre GitHub, Gitla
 Formato do formulário:
 Nome: (Não aceita números, caracteres especiais ou pontuações)
 E-mail: (Deve aceitar apenas o padrão de e-mail)
-Senha: (Deve possuir no mínimo 6 caracteres e ter no mínimo uma letra e um número. Deve ser inserida com MD5 no banco)
+Senha: (Deve possuir no mínimo 6 caracteres e ter no mínimo uma letra e um número. 
+		Deve ser inserida com MD5 no banco)
 Botão "Enviar"
 Botão "Limpar"
 Obs.: As validações podem ser feitas em qualquer linguagem, desde que funcionem.
@@ -98,6 +100,7 @@ Obs.: As validações podem ser feitas em qualquer linguagem, desde que funcione
 	$conf_senha		=$_POST['conf_senha'];
 	$erro			= 0;
 	
+	
 	//Verifica se o campo não está em branco
 	if (empty($nome) OR strstr ($nome, ' ')==FALSE)
 	{echo "Favor digitar seu nome corretemente.<br>"; $erro=1;}
@@ -139,8 +142,11 @@ Obs.: As validações podem ser feitas em qualquer linguagem, desde que funcione
 	$email		=$_POST['email'];
 	$senha		=$_POST['senha'];
 	
+	// cria o hash da senha
+	$passwordHash = make_hash($senha);
+	
 	$sql = "INSERT INTO tabela1 VALUES";
-	$sql .= "('$nome','$email','$senha')";
+	$sql .= "('$nome','$email','$passwordHash')";
 	
 	if ($conexao->query($sql) ===TRUE) {
 		echo "Usuário incluído com sucesso!"
