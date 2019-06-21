@@ -1,0 +1,209 @@
+Buenas!
+Segue o desafio de PHP/MySQL para darmos início ao DevLabs. Este desafio tem como objetivo alinhar o conhecimento inicial para em seguida formarmos as duplas de trabalho.
+
+No link abaixo disponibilizamos os arquivos iniciais para este processo.
+http://lideranca.kinghost.net/processo_php_mysql.tar.gz
+
+Antes de iniciar:
+
+- Certifique-se de estar em seu domínio de funcionário: nome.kinghost.net
+- O banco mysql deve ficar na farm8
+- O web deve ficar em web01-king.kinghost.net
+- A versão PHP selecionada deve ser 7.0 ou maior
+- O log de erros do PHP deve estar ativo via painel
+- Indentação
+
+Todo o processo deve ser versionado através do GIT. Escolha entre GitHub, Gitlab e Bitbucket para criar seu repositório antes de iniciar as tarefas.
+
+
+1- Faça o arquivo select.php funcionar com PDO.
+'conecta_mysql.inc'
+	<?php
+                $conn;
+                $host = 'mysql.lucianofagundes.kinghost.net';         
+                $user= 'lucianofagunde02';
+                $pass = 'King231212';
+                $db = 'lucianofagunde02';
+                $message_error = 'Erro na conexão';  
+               
+                try{
+                    $conn = new PDO(
+                        'mysql:host='.$host.';dbname='.$db,
+                        $user,
+                        $pass
+                    );
+                  
+                   
+                } catch (PDOException $e) {
+                    die($message_error." Erro ".$e->getMessage());
+                }
+               
+                echo 'Conexão com sucesso!';
+    ?>
+
+2- Crie uma página com um formulário que insira dados na tabela1 e informe o link de acesso.
+Formato do formulário:
+Nome: (Não aceita números, caracteres especiais ou pontuações)
+E-mail: (Deve aceitar apenas o padrão de e-mail)
+Senha: (Deve possuir no mínimo 6 caracteres e ter no mínimo uma letra e um número. Deve ser inserida com MD5 no banco)
+Botão "Enviar"
+Botão "Limpar"
+Obs.: As validações podem ser feitas em qualquer linguagem, desde que funcionem.
+---------------------------------------------------------------------------------------------
+'cadastro.html'
+	<!DOCTYPE html>
+	<html lang="pt-br">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Cadastro Tabela1</title>
+	</head>
+	<body>
+	
+	<h1>Cadastro na tabela1</h1>
+	<br>
+	
+	<form action="verifica.php" method="POST">
+	
+	<pre>
+	Insira as informações a serem incluídas na tabela1
+	
+	Nome: 			<input type="text" size="35" maxlength="256" name="nome" pattern="[a-z\s]+$" />
+	E-mail:			<input type="text" size="35" maxlength="256" name="email">
+	Senha: 			<input type="text" size="35" maxlength="256" name="senha">
+	Confirma Senha: <input type="text" size="35" maxlength="256" name="conf_senha">
+	
+	<input type="reset" value="Apagar Campos" name="limpar">
+	<input type="submit" value="Efetuar Cadastro" name="enviar">
+	
+	</pre>
+	</form>
+	
+	</body>
+	</html>
+---------------------------------------------------------------------------------------------------
+'verifica.php'
+	
+	<!DOCTYPE html>
+	<html lang="pt-br">
+	<head>
+	<meta charset="utf-8"/>
+	<title>verifica.php</title>
+	</head>
+	<body>
+	<?php
+	
+	$nome			=$_POST['nome'];
+	$email			=$_POST['email'];
+	$senha			=$_POST['senha'];
+	$conf_senha		=$_POST['conf_senha'];
+	$erro			= 0;
+	
+	//Verifica se o campo não está em branco
+	if (empty($nome) OR strstr ($nome, ' ')==FALSE)
+	{echo "Favor digitar seu nome corretemente.<br>"; $erro=1;}
+	
+	//Verifica se o campo email esta preenchido corretamente
+	if (strlen($email)<8 || strstr ($email, '@')==FALSE)
+	{echo "Favor digitar seu email corretemente.<br>"; $erro=1;}
+	
+	//Verifica se o campo senha não está em branco
+	if (empty($senha) OR strstr ($senha, ' ')==FALSE)
+	{echo "Favor digitar uma senha válida.<br>"; $erro=1;}
+	
+	//Verifica se o campo verifica senha não está em branco
+	if (empty($conf_senha) OR strstr ($conf_senha, ' ')==FALSE)
+	{echo "Favor digitar novamente a sua senha para confirmação.<br>"; $erro=1;}
+	
+	//Verifica se o campo de conferencia da senha é válido
+	if ($conf_senha != $senha)==TRUE)
+	{echo "A senhas digitadas não são iguais. Digite novamente!"; $erro=1;} 
+	
+	
+	//verifica se não houve erro
+	if ($erro==0)
+	{echo "Todos os dados foram preenchidos corretamente";}
+	include 'insere.inc';
+	
+	?>
+	
+	</body>
+	</html>
+	
+--------------------------------------------------------------------
+
+'insere.inc'
+	<?php
+	
+	include 'conecta_mysql.inc';
+	$nome		=$_POST['nome'];
+	$email		=$_POST['email'];
+	$senha		=$_POST['senha'];
+	
+	$sql = "INSERT INTO tabela1 VALUES";
+	$sql .= "('$nome','$email','$senha')";
+	
+	if ($conexao->query($sql) ===TRUE) {
+		echo "Usuário incluído com sucesso!"
+	} else {
+		echo "Erro: " .$sql . "<br>" . $conexao->error;
+	}
+
+	$conexao->close();
+	
+	?>
+-----------------------------------------------------------------------
+3- Sempre que algum registro for alterado na tabela1 ele deve 
+ser inserido previamente na tabela1_backup. Esse processo deve ser feito no banco de dados.
+
+Descreva como realizou a tarefa.
+
+Exemplo:
+Na tabela 1 tenho o seguinte registro:
+id=1
+nome=Eduardo Silva Machado
+email=eduardo.machado@kinghost.com.br
+senha=mudar5555
+ultima_alteracao=2015-12-09 18:14:31
+
+Altero ele para:
+id=1
+nome=Eduardo
+email=eduardo.machado@cyberweb.com.br
+senha=outrasenha
+ultima_alteracao=2015-12-09 18:15:54
+
+Na tabela tabela1_backup deve ser inserido um registro:
+id=1
+nome=Eduardo Silva Machado
+email=eduardo.machado@kinghost.com.br
+senha=mudar5555
+ultima_alteracao=2015-12-09 18:15:54
+
+ATENÇÃO:
+- A ultima_alteracao do registro na tabela1_backup deve 
+ser do momento em que a alteração foi feita e não a data antiga.
+- A tabela1_backup deve suportar diversos registros com mesmo id,nome,email,etc.
+
+4- Crie uma view chamada 'teste' que 
+contenha um contador de ocorrências iguais e 
+seja agrupado por id da tabela1_backup.
+Informe como criou a view.
+
+5- Crie uma procedure que retorne todos os dados da tabela 'tabela1'.
+Informe como criou a procedure.
+
+6- Desenvolva uma página em php que chame os dados da tabela1.
+Esses dados devem ser exibidos em uma table com border, sem paginação e limitando a 300 registros.
+
+7- A query abaixo não está funcionando pois leva mais de 300 segundos. Otimize as tabelas para que esta consulta leve menos de 10 segundos.
+Informe as alterações feitas.
+SELECT SQL_NO_CACHE COUNT(*), `nome_func`, `sobrenome_func`, SUM(`salario`) AS soma_salario FROM `funcionarios`, `salarios` WHERE funcionarios.nr_func = salarios.nr_func GROUP BY nome_func,sobrenome_func ORDER BY soma_salario DESC;
+
+ATENÇÃO: A query não deve ser alterada.
+
+8- Aplique um dos frameworks abaixo nas páginas criadas nas questões 2 e 6 para que a apresentação delas fique mais agradável.
+Bootstrap - http://getbootstrap.com/
+Skeleton - http://getskeleton.com/
+
+
+Qualquer dúvida enviem um e-mail para devlabs@kinghost.com.br
