@@ -7,11 +7,7 @@
                 $message_error = 'Erro na conexão';  
                
                 try{
-                    $conn = new PDO(
-                        'mysql:host='.$host.';dbname='.$db,
-                        $user,
-                        $pass
-                    );
+                    $conn = new PDO('mysql:host=$host;dbname=$db', '$user', '$pass');
                   
                    
                 } catch (PDOException $e) {
@@ -20,3 +16,7 @@
                
                 echo 'Conexão com sucesso!';
     ?>
+
+    <?php
+$pdo = new PDO("mysql:host=HOST;dbname=BASE", "USUARIO", "SENHA"); 
+?>
