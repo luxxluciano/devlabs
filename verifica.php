@@ -10,7 +10,7 @@
 	$nome			=$_POST['nome'];
 	$email			=$_POST['email'];
 	$senha			=$_POST['senha'];
-	$conf_senha		=$_POST['conf_senha'];
+	//$conf_senha		=$_POST['conf_senha'];
 	$erro			= 0;
 	
 	
@@ -27,8 +27,8 @@
 	{echo "Favor digitar uma senha válida.<br>"; $erro=1;}
 	
 	//Verifica se o campo verifica senha não está em branco
-	if (empty($conf_senha) OR strstr ($conf_senha, ' ')==FALSE)
-	{echo "Favor digitar novamente a sua senha para confirmação.<br>"; $erro=1;}
+	//if (empty($conf_senha) OR strstr ($conf_senha, ' ')==FALSE)
+	//{echo "Favor digitar novamente a sua senha para confirmação.<br>"; $erro=1;}
 	
 	//Verifica se o campo de conferencia da senha é válido
 	//if ($conf_senha !== $senha)==TRUE)
