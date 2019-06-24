@@ -1,4 +1,22 @@
-<?php 
-$conecta = mysql_connect("mysql.eduardo.machado.kinghost.net", "eduardo", "mudar5555") or print (mysql_error()); 
-mysql_select_db("eduardo", $conecta) or print(mysql_error()); 
-?>
+<?php
+                $conn;
+                $host = 'mysql.lucianofagundes.kinghost.net';         
+                $user= 'lucianofagunde02';
+                $pass = 'devlabs231212';
+                $db = 'lucianofagunde02';
+                $message_error = 'Erro na conexão';  
+               
+                try{
+                    $conn = new PDO(
+                        'mysql:host='.$host.';dbname='.$db,
+                        $user,
+                        $pass
+                    );
+                  
+                   
+                } catch (PDOException $e) {
+                    die($message_error." Erro ".$e->getMessage());
+                }
+               
+                echo 'Conexão com sucesso!';
+    ?>

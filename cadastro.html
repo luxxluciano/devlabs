@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Cadastro Tabela1</title>
+	</head>
+	<body>
+	
+	<h1>Cadastro na tabela1</h1>
+	<br>
+	
+	<form action="verifica.php" method="POST">
+	
+	<pre>
+	Insira as informações a serem incluídas na tabela1
+	
+	Nome: 			<input type="text" size="35" maxlength="256" name="nome" pattern="[a-z\s]+$" / value="" required="required">
+	E-mail:			<input type="text" size="35" maxlength="256" name="email" value="" required="required">
+	Senha: 			<input type="password" size="35" name="senha" pattern="[a-zA-Z0-9]{6,24}" placeholder="Letras e números, 6 a 24 caracteres" value="" required="required">
+	Confirma Senha: <input type="password" size="35" name="conf_senha" pattern="[a-zA-Z0-9]{6,24}" placeholder="Confirme sua senha" value="" required="required">
+	
+	<input type="reset" value="Apagar Campos" name="limpar">
+	<input type="submit" value="Efetuar Cadastro" name="enviar">
+	
+	</pre>
+	</form>
+	
+	</body>
+	</html>
