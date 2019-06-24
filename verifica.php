@@ -31,8 +31,8 @@
 	{echo "Favor digitar novamente a sua senha para confirmação.<br>"; $erro=1;}
 	
 	//Verifica se o campo de conferencia da senha é válido
-	if ($conf_senha !== $senha)==TRUE)
-	{echo "A senhas digitadas não são iguais. Digite novamente!"; $erro=1;} 
+	//if ($conf_senha !== $senha)==TRUE)
+	//{echo "A senhas digitadas não são iguais. Digite novamente!"; $erro=1;} 
 	
 	//Verifica se a senha contém letras e números
 	//function senhaValida($senha) {
