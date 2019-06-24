@@ -15,16 +15,16 @@
 	
 	
 	//Verifica se o campo não está em branco
-	if (empty($nome) OR strstr ($nome, ' ')==FALSE)
-	{echo "Favor digitar seu nome corretemente.<br>"; $erro=1;}
+	//if (empty($nome) OR strstr ($nome, ' ')==FALSE)
+	//{echo "Favor digitar seu nome corretemente.<br>"; $erro=1;}
 	
 	//Verifica se o campo email esta preenchido corretamente
-	if (strlen($email)<8 || strstr ($email, '@')==FALSE)
-	{echo "Favor digitar seu email corretemente.<br>"; $erro=1;}
+	//if (strlen($email)<8 || strstr ($email, '@')==FALSE)
+	//{echo "Favor digitar seu email corretemente.<br>"; $erro=1;}
 	
 	//Verifica se o campo senha não está em branco
-	if (empty($senha) OR strstr ($senha, ' ')==FALSE)
-	{echo "Favor digitar uma senha válida.<br>"; $erro=1;}
+	//if (empty($senha) OR strstr ($senha, ' ')==FALSE)
+	//{echo "Favor digitar uma senha válida.<br>"; $erro=1;}
 	
 	//Verifica se o campo verifica senha não está em branco
 	//if (empty($conf_senha) OR strstr ($conf_senha, ' ')==FALSE)
